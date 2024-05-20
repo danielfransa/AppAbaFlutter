@@ -1,4 +1,5 @@
 import 'package:aba_app/pages/login_page.dart';
+import 'package:aba_app/pages/my_home_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -10,7 +11,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        // appBarTheme: const AppBarTheme(
+        //   backgroundColor: Colors.cyan,
+        //   foregroundColor: Colors.white,
+        // ),
+        // bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        //     backgroundColor: Colors.cyan,
+        //     selectedItemColor: Colors.white,
+        //     unselectedItemColor: Colors.white70),
         useMaterial3: true,
       ),
       home: const LoginPage(),
