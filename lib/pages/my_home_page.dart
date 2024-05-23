@@ -1,3 +1,4 @@
+import 'package:aba_app/pages/page2.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -13,12 +14,11 @@ class _MyHomePageState extends State<MyHomePage> {
       'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
   int _selectedIndex = 0;
+  final List<String> appBarTitles = ['Home', 'Page2', 'Page3', 'Page4'];
 
   var pages = [
     Container(color: Colors.white70),
-    Container(
-      color: Colors.black,
-    ),
+    const Page2(),
     Container(
       color: Colors.amber,
     ),
@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(appBarTitles[_selectedIndex]),
       ),
       drawer: SafeArea(
         child: Drawer(

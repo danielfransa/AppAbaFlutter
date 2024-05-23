@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
         //     unselectedItemColor: Colors.white70),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const MyHomePage(
+        title: "Primeira Página",
+      ),
     );
   }
 }
