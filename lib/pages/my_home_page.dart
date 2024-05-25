@@ -1,4 +1,6 @@
-import 'package:aba_app/pages/page2.dart';
+import 'package:aba_app/pages/agenda.dart';
+import 'package:aba_app/pages/buscar.dart';
+import 'package:aba_app/pages/perfil.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,17 +16,13 @@ class _MyHomePageState extends State<MyHomePage> {
       'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
   int _selectedIndex = 0;
-  final List<String> appBarTitles = ['Home', 'Page2', 'Page3', 'Page4'];
+  final List<String> appBarTitles = ['Home', 'Agenda', 'Perfil', 'Busca'];
 
   var pages = [
     Container(color: Colors.white70),
-    const Page2(),
-    Container(
-      color: Colors.amber,
-    ),
-    Container(
-      color: Colors.green,
-    ),
+    const Agenda(),
+    const Perfil(),
+    const Buscar(),
   ];
 
   @override
@@ -70,16 +68,16 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: 'Agenda',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Page2',
+            label: 'Perfil',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.airlines),
-            label: 'Page3',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mail),
-            label: 'Page4',
+            icon: Icon(Icons.search),
+            label: 'Buscar',
           )
         ],
       ),

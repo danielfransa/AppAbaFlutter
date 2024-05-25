@@ -1,4 +1,3 @@
-import 'package:aba_app/pages/login_page.dart';
 import 'package:aba_app/pages/my_home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
         //     backgroundColor: Colors.cyan,
         //     selectedItemColor: Colors.white,
         //     unselectedItemColor: Colors.white70),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       home: const MyHomePage(
         title: "Primeira Página",
