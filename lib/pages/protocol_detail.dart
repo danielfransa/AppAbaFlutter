@@ -9,7 +9,7 @@ class ProtocolDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes e Protocolos'),
+        title: const Text('Detalhes do Protocolos e Aplicar um Novo Protocolo'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

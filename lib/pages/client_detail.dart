@@ -1,14 +1,14 @@
 import 'package:aba_app/pages/protocol_detail.dart';
 import 'package:flutter/material.dart';
 
-class PerfilDetails extends StatelessWidget {
-  const PerfilDetails({super.key});
+class ClientDetail extends StatelessWidget {
+  const ClientDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes e Protocolos'),
+        title: const Text('Detalhes do Cliente e os links para Protocolos'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

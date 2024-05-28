@@ -14,7 +14,7 @@ class ApplicationDetails extends StatelessWidget {
         children: [
           Center(
             child: Text(
-                "Tela para detalhes dos protocolos lançados, informativos e relatórios"),
+                "Tela para detalhes dos protocolos lançados, como (Quem aplicou, quando, porcentagem de acerto, teve alguma ajuda, nº de acerto e nº de erros...) informativos e relatórios"),
           )
         ],
       ),
