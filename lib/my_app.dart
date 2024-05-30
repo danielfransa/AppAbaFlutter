@@ -11,14 +11,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-        // appBarTheme: const AppBarTheme(
-        //   backgroundColor: Colors.cyan,
-        //   foregroundColor: Colors.white,
-        // ),
-        // bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        //     backgroundColor: Colors.cyan,
-        //     selectedItemColor: Colors.white,
-        //     unselectedItemColor: Colors.white70),
         useMaterial3: false,
       ),
       home: const MyHomePage(

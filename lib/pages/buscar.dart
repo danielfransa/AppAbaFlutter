@@ -1,5 +1,7 @@
-import 'package:aba_app/pages/client_detail.dart';
+import 'package:aba_app/widgets/list_cards.dart';
+import 'package:aba_app/widgets/search_imput.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Buscar extends StatelessWidget {
   const Buscar({super.key});
@@ -7,22 +9,14 @@ class Buscar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: ((context) => const ClientDetail()),
-                ),
-              );
-            },
-            child: const Text('Client Detail')),
-        const Center(
-          child: Text(
-              "Um botão de procurar que apos a busca dever trazer uma lista e ao clicar leva para a mesma pagina de perfil_detail que a tela perfil mostra."),
-        )
+        SearchImput(),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: ListView(children: createList(context)),
+          ),
+        ),
       ],
     );
   }

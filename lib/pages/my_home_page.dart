@@ -1,4 +1,3 @@
-import 'package:aba_app/pages/agenda.dart';
 import 'package:aba_app/pages/buscar.dart';
 import 'package:aba_app/pages/perfil.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +15,12 @@ class _MyHomePageState extends State<MyHomePage> {
       'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
   int _selectedIndex = 0;
-  final List<String> appBarTitles = ['Home', 'Agenda', 'Perfil', 'Busca'];
+  final List<String> appBarTitles = ['Busca', 'Perfil', 'Feed'];
 
   var pages = [
-    Container(color: Colors.white70),
-    const Agenda(),
-    const Perfil(),
     const Buscar(),
+    const Perfil(),
+    Container(color: Colors.white70),
   ];
 
   @override
@@ -64,20 +62,20 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.search),
+            label: 'Buscar',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: 'Agenda',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.calendar_month),
+          //   label: 'Agenda',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Perfil',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Buscar',
+            icon: Icon(Icons.feed),
+            label: 'Feed',
           )
         ],
       ),
