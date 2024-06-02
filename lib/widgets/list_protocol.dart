@@ -18,13 +18,14 @@ List<Widget> createProtocolList(BuildContext context) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: ((context) => const ProtocolDetail()),
+                builder: ((context) => ProtocolDetail(
+                      protocol: protocol,
+                      Protocol: protocol,
+                    )),
               ),
             );
           },
-          title: Text(
-            protocol.name,
-          )),
+          title: Text(protocol.name)),
     );
   });
 }

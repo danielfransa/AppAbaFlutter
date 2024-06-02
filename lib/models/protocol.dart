@@ -27,5 +27,5 @@ class Protocol {
 
   Protocol({required this.name});
 
-  Protocol.fromFaker(Faker faker) : name = protocols[random.nextInt(10)];
+  Protocol.fromFaker(Faker faker) : name = protocols[random.nextInt(9)];
 }
