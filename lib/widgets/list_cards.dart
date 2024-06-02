@@ -16,11 +16,11 @@ List<Widget> createList(BuildContext context) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: ((context) => const ClientDetail()),
+              builder: ((context) => ClientDetail()),
             ),
           );
         },
-        leading: Image.network(client.imageUrl),
+        leading: CircleAvatar(backgroundImage: NetworkImage(client.imageUrl)),
         title: Text(
           client.name,
         ),

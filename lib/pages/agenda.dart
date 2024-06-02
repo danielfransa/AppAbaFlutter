@@ -14,7 +14,7 @@ class Agenda extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: ((context) => const ClientDetail()),
+                  builder: ((context) => ClientDetail()),
                 ),
               );
             },
