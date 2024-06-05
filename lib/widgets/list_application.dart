@@ -15,7 +15,8 @@ List<Widget> createApplicationList(BuildContext context) {
     );
 
     final DateFormat dateFormat = DateFormat('dd/MM/yy HH:mm');
-    final cardColor = application.aborted ? Colors.red : Colors.green;
+    final cardColor =
+        application.aborted ? Colors.red.shade300 : Colors.green.shade300;
 
     // Gerar Card com os dados a partir do objeto feed
     return Card(

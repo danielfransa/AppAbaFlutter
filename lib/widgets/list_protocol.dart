@@ -1,6 +1,4 @@
-import 'package:aba_app/models/client.dart';
 import 'package:aba_app/models/protocol.dart';
-import 'package:aba_app/pages/client_detail.dart';
 import 'package:aba_app/pages/protocol_detail.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';

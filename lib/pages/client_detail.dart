@@ -1,5 +1,4 @@
 import 'package:aba_app/models/client.dart';
-import 'package:aba_app/pages/protocol_detail.dart';
 import 'package:aba_app/widgets/list_protocol.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +77,7 @@ class ClientDetail extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Completed',
+                            'Completados',
                             style: TextStyle(
                               fontSize: 22,
                               color: Colors.white,
@@ -114,7 +113,7 @@ class ClientDetail extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Aborted',
+                            'Abortados',
                             style: TextStyle(
                               fontSize: 22,
                               color: Colors.white,

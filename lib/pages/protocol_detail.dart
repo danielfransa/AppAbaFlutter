@@ -1,5 +1,4 @@
 import 'package:aba_app/models/protocol.dart';
-import 'package:aba_app/pages/application_details.dart';
 import 'package:aba_app/pages/new_application.dart';
 import 'package:aba_app/widgets/list_application.dart';
 import 'package:flutter/material.dart';
