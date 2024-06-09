@@ -15,12 +15,15 @@ List<Widget> createApplicationList(BuildContext context) {
     );
 
     final DateFormat dateFormat = DateFormat('dd/MM/yy HH:mm');
-    final cardColor =
-        application.aborted ? Colors.red.shade300 : Colors.green.shade300;
+    final circleColor = application.aborted
+        ? const Color.fromRGBO(255, 0, 0, 0.2)
+        : const Color.fromRGBO(0, 255, 0, 0.2);
+    final iconColor =
+        application.aborted ? Colors.redAccent : Colors.greenAccent;
+    final icon = application.aborted ? Icons.clear : Icons.done;
 
     // Gerar Card com os dados a partir do objeto feed
     return Card(
-      color: cardColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 8.0,
       child: ListTile(
@@ -32,6 +35,13 @@ List<Widget> createApplicationList(BuildContext context) {
             ),
           );
         },
+        leading: CircleAvatar(
+          backgroundColor: circleColor,
+          child: Icon(
+            icon,
+            color: iconColor,
+          ),
+        ),
         title: Text(
           'Aplicação - ${dateFormat.format(application.createdAt)}  - Acerto:  ${application.positivePercentage.toStringAsFixed(2)}%',
           style: const TextStyle(fontWeight: FontWeight.bold),
