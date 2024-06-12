@@ -1,7 +1,11 @@
 import 'dart:math';
+import 'package:aba_app/data/application_data.dart';
+import 'package:aba_app/pages/application_graf.dart';
+import 'package:aba_app/pages/application_stats.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:aba_app/models/application.dart';
-import 'package:aba_app/pages/application_details.dart';
+import 'package:aba_app/pages/protocol_stats.dart';
 import 'package:flutter/material.dart';
 
 List<Widget> createApplicationList(BuildContext context) {
@@ -23,32 +27,63 @@ List<Widget> createApplicationList(BuildContext context) {
     final icon = application.aborted ? Icons.clear : Icons.done;
 
     // Gerar Card com os dados a partir do objeto feed
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 8.0,
-      child: ListTile(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+      child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: ((context) => ApplicationDetails()),
+              builder: ((context) => ApplicationStats(applicationData)),
             ),
           );
         },
-        leading: CircleAvatar(
-          backgroundColor: circleColor,
-          child: Icon(
-            icon,
-            color: iconColor,
-          ),
-        ),
-        title: Text(
-          'Aplicação - ${dateFormat.format(application.createdAt)}  - Acerto:  ${application.positivePercentage.toStringAsFixed(2)}%',
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text('Aplicado por: ${application.createdBy}'),
-        trailing:
-            Text('Status: ${application.aborted ? 'Abortado' : 'Completado'}'),
+        child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            elevation: 4.0,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
+                  child: CircleAvatar(
+                    backgroundColor: circleColor,
+                    child: Icon(
+                      icon,
+                      color: iconColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: Text(
+                          'Aplicação - ${dateFormat.format(application.createdAt)}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        child: Text(
+                            'Acerto:  ${application.positivePercentage.toStringAsFixed(2)}%'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                        child: Text('Aplicado por: ${application.createdBy}'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )),
       ),
     );
   });

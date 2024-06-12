@@ -1,16 +1,25 @@
 import 'package:aba_app/models/client.dart';
+import 'package:aba_app/pages/protocol_graf.dart';
 import 'package:faker/faker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class ApplicationDetails extends StatelessWidget {
-  ApplicationDetails({super.key});
+class ProtocolStats extends StatefulWidget {
+  const ProtocolStats({super.key});
+
+  @override
+  State<ProtocolStats> createState() => _ProtocolStatsState();
+}
+
+class _ProtocolStatsState extends State<ProtocolStats> {
   final client = Client.fromFaker(faker);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes da Aplicação'),
+        title: const Text('Detalhes do Protocolo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -181,8 +190,18 @@ class ApplicationDetails extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Image.asset(
-                'assets/images/graficos.png',
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProtocolGraf(),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  'assets/images/graficos.png',
+                ),
               ),
             )
           ],

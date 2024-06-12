@@ -1,5 +1,7 @@
 import 'package:aba_app/models/protocol.dart';
+import 'package:aba_app/pages/application_graf.dart';
 import 'package:aba_app/pages/new_application.dart';
+import 'package:aba_app/pages/protocol_stats.dart';
 import 'package:aba_app/widgets/list_application.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +14,19 @@ class ProtocolDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detalhes do Protocolo'),
-      ),
+      appBar: AppBar(title: const Text('Detalhes do Protocolo'), actions: [
+        IconButton(
+          icon: const Icon(Icons.stacked_line_chart_sharp),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: ((context) => const ApplicationGraf()),
+              ),
+            );
+          },
+        ),
+      ]),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -36,32 +48,6 @@ class ProtocolDetail extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton.icon(
-                    style: ButtonStyle(
-                        elevation: const MaterialStatePropertyAll(8),
-                        backgroundColor: const MaterialStatePropertyAll(
-                            Color.fromRGBO(40, 130, 158, 1)),
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)))),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => const NewApplication()),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.add),
-                    label: const Text('Novo'),
-                  ),
-                ],
-              ),
-            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8),
@@ -69,6 +55,24 @@ class ProtocolDetail extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: ((context) => const NewApplication()),
+            ),
+          );
+        },
+        backgroundColor: const Color.fromRGBO(40, 130, 158, 1),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        isExtended: true,
+        elevation: 8,
+        label: const Row(
+          children: [Icon(Icons.add_sharp), Text('Novo')],
         ),
       ),
     );
