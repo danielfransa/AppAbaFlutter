@@ -1,4 +1,4 @@
-import 'package:aba_app/pages/perfil.dart';
+import 'package:aba_app/core/constants.dart';
 import 'package:faker/faker.dart';
 
 class Client {
@@ -15,15 +15,21 @@ class Client {
   // late String createdBy;
   // late DateTime createdAt;
   // late List<Responsible> respponsible;
-  final String imageUrl;
+  final String? imageData;
 
-  Client({required this.name, required this.email, required this.imageUrl});
+  Client({
+    required this.name,
+    required this.email,
+    this.imageData,
+  });
 
-  Client.fromFaker(Faker faker)
-      : name = faker.person.name(),
-        email = faker.internet.email(),
-        imageUrl = faker.image.image(
-            width: 640, height: 480, keywords: const ['face'], random: true);
+  factory Client.fake() {
+    return Client(
+      name: faker.person.name(),
+      email: faker.internet.email(),
+      imageData: kBase64Image,
+    );
+  }
 }
 
 // Address address, vai precisar?

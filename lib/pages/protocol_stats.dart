@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:aba_app/core/constants.dart';
 import 'package:aba_app/models/client.dart';
 import 'package:aba_app/pages/protocol_graf.dart';
 import 'package:faker/faker.dart';
@@ -13,7 +16,7 @@ class ProtocolStats extends StatefulWidget {
 }
 
 class _ProtocolStatsState extends State<ProtocolStats> {
-  final client = Client.fromFaker(faker);
+  final client = Client.fake();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,8 @@ class _ProtocolStatsState extends State<ProtocolStats> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipOval(
-                  child: Image.network(
-                    client.imageUrl,
+                  child: Image.memory(
+                    base64Decode(kBase64Image),
                     height: 130,
                     width: 130,
                     fit: BoxFit.cover,

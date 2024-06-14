@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 List<Widget> createProtocolList(BuildContext context) {
   // Gerar lista de Widgets com 20 elementos
-  return List.generate(4, (index) {
+  return List.generate(3, (index) {
     // Gerar um objeto da nossa model class a partir do Faker()
     final protocol = Protocol.fromFaker(faker);
 

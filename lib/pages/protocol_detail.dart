@@ -1,7 +1,6 @@
 import 'package:aba_app/models/protocol.dart';
 import 'package:aba_app/pages/application_graf.dart';
 import 'package:aba_app/pages/new_application.dart';
-import 'package:aba_app/pages/protocol_stats.dart';
 import 'package:aba_app/widgets/list_application.dart';
 import 'package:flutter/material.dart';
 

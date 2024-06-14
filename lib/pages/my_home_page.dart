@@ -1,6 +1,9 @@
+import 'package:aba_app/models/client.dart';
 import 'package:aba_app/pages/buscar.dart';
 import 'package:aba_app/pages/perfil.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -10,6 +13,10 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+buildFakeUsers() {
+  return List.generate(4, (index) => Client.fake());
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   final url =
       'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
@@ -17,9 +24,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final List<String> appBarTitles = ['Busca', 'Perfil', 'Feed'];
 
-  var pages = [
-    const Buscar(),
-    const Perfil(),
+  List<Widget> pages = [
+    Buscar(
+      clients: buildFakeUsers(),
+    ),
+    Perfil(),
     Container(color: Colors.white70),
   ];
 
@@ -48,36 +57,45 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: pages,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+      body: pages[_selectedIndex],
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (index) =>
+            setState(() => _selectedIndex = index),
+        selectedIndex: _selectedIndex,
+        destinations: const [
+          NavigationDestination(
+            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
             label: 'Buscar',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.calendar_month),
-          //   label: 'Agenda',
-          // ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+          NavigationDestination(
+            icon: FaIcon(FontAwesomeIcons.user),
             label: 'Perfil',
+            selectedIcon: FaIcon(FontAwesomeIcons.solidUser),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feed),
+          NavigationDestination(
+            icon: FaIcon(FontAwesomeIcons.calendarCheck),
             label: 'Feed',
-          )
+            selectedIcon: FaIcon(FontAwesomeIcons.solidCalendarCheck),
+          ),
         ],
+        // items: const [
+        //   BottomNavigationBarItem(
+        //     icon: FaIcon(FontAwesomeIcons.calendar),
+        //     label: 'Buscar',
+        //   ),
+        //   // BottomNavigationBarItem(
+        //   //   icon: Icon(Icons.calendar_month),
+        //   //   label: 'Agenda',
+        //   // ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(Icons.person),
+        //     label: 'Perfil',
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(Icons.feed),
+        //     label: 'Feed',
+        //   )
+        // ],
       ),
     );
   }

@@ -1,11 +1,14 @@
+import 'dart:convert';
+
+import 'package:aba_app/core/constants.dart';
 import 'package:aba_app/models/client.dart';
 import 'package:aba_app/widgets/list_protocol.dart';
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 
 class ClientDetail extends StatelessWidget {
-  ClientDetail({super.key});
-  final client = Client.fromFaker(faker);
+  const ClientDetail({super.key, required this.client});
+
+  final Client client;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,8 @@ class ClientDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipOval(
-                  child: Image.network(
-                    client.imageUrl,
+                  child: Image.memory(
+                    base64Decode(kBase64Image),
                     height: 190,
                     width: 190,
                     fit: BoxFit.cover,
