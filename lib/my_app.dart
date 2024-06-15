@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
       ),
       home: const MyHomePage(
-        title: "Primeira Página",
+        title: "Aba Project",
       ),
     );
   }

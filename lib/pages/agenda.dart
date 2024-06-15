@@ -1,11 +1,10 @@
 import 'package:aba_app/models/client.dart';
-import 'package:aba_app/pages/client_detail.dart';
 import 'package:flutter/material.dart';
 
 class Agenda extends StatelessWidget {
   Agenda({super.key});
 
-  final client = Client.fake();
+  final client = Client;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +16,8 @@ class Agenda extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: ((context) => ClientDetail(
-                        client: client,
-                      )),
+                  builder: ((context) =>
+                      const Text('Você Não deveria Estar aqui!!!!')),
                 ),
               );
             },

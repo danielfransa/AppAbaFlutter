@@ -1,35 +1,38 @@
 import 'package:aba_app/core/constants.dart';
-import 'package:faker/faker.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'client.g.dart';
+
+String imageData = kBase64Image;
+
+@JsonSerializable()
 class Client {
+  final int id;
+  @JsonKey(name: 'name')
   final String name;
-  // late DateTime birthday;
-  // late Gender gender;
+  @JsonKey(name: 'birthday')
+  final DateTime birthday;
+  @JsonKey(name: 'email')
   final String email;
-  // late String cpf;
-  // late String telephone;
-  // late String educationLevel;
-  // late String medicalInformations;
-  // late String medicinesInUse;
-  // late String processingInformation;
-  // late String createdBy;
-  // late DateTime createdAt;
-  // late List<Responsible> respponsible;
+  @JsonKey(name: 'imageData')
   final String? imageData;
 
   Client({
+    required this.id,
     required this.name,
     required this.email,
+    required this.birthday,
     this.imageData,
   });
 
-  factory Client.fake() {
-    return Client(
-      name: faker.person.name(),
-      email: faker.internet.email(),
-      imageData: kBase64Image,
-    );
+  factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ClientToJson(this);
+
+  @override
+  String toString() {
+    return 'Client(id: $id, name: $name, email: $email, birthday: $birthday, imageData: $imageData)';
   }
 }
 
-// Address address, vai precisar?
+// flutter pub run build_runner watch --delete-conflicting-outputs

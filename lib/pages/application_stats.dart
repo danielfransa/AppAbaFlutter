@@ -1,7 +1,6 @@
 import 'package:aba_app/data/application_data.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ApplicationStats extends StatelessWidget {
   final List<ApplicationData> data;

@@ -1,4 +1,5 @@
 import 'package:aba_app/core/constants.dart';
+import 'package:aba_app/core/utils.dart';
 import 'package:aba_app/models/client.dart';
 import 'package:aba_app/pages/client_detail.dart';
 import 'package:aba_app/widgets/avatar_widget.dart';
@@ -44,6 +45,10 @@ class ListClients extends StatelessWidget {
                   ),
                   Text(
                     'Email: ${client.email}',
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  Text(
+                    'Idade: ${calculateAge(client.birthday)} anos',
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ],

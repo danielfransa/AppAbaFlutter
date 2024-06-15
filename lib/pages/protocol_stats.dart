@@ -1,12 +1,8 @@
 import 'dart:convert';
 
 import 'package:aba_app/core/constants.dart';
-import 'package:aba_app/models/client.dart';
 import 'package:aba_app/pages/protocol_graf.dart';
-import 'package:faker/faker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ProtocolStats extends StatefulWidget {
   const ProtocolStats({super.key});
@@ -16,8 +12,6 @@ class ProtocolStats extends StatefulWidget {
 }
 
 class _ProtocolStatsState extends State<ProtocolStats> {
-  final client = Client.fake();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,19 +36,19 @@ class _ProtocolStatsState extends State<ProtocolStats> {
                 )
               ],
             ),
-            Text(
-              client.name,
-              style: const TextStyle(
+            const Text(
+              'client.name',
+              style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w700,
                 color: Colors.black,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 10.0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 10.0),
               child: Text(
-                client.email,
-                style: const TextStyle(
+                'client.email',
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: Colors.grey,

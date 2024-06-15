@@ -1,11 +1,8 @@
 import 'dart:math';
 import 'package:aba_app/data/application_data.dart';
-import 'package:aba_app/pages/application_graf.dart';
 import 'package:aba_app/pages/application_stats.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:aba_app/models/application.dart';
-import 'package:aba_app/pages/protocol_stats.dart';
 import 'package:flutter/material.dart';
 
 List<Widget> createApplicationList(BuildContext context) {

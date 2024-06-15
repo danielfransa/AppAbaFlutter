@@ -1,7 +1,5 @@
-import 'package:aba_app/models/client.dart';
 import 'package:aba_app/pages/buscar.dart';
 import 'package:aba_app/pages/perfil.dart';
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,10 +11,6 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-buildFakeUsers() {
-  return List.generate(4, (index) => Client.fake());
-}
-
 class _MyHomePageState extends State<MyHomePage> {
   final url =
       'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
@@ -25,10 +19,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<String> appBarTitles = ['Busca', 'Perfil', 'Feed'];
 
   List<Widget> pages = [
-    Buscar(
-      clients: buildFakeUsers(),
-    ),
-    Perfil(),
+    const Buscar(),
+    const Perfil(),
     Container(color: Colors.white70),
   ];
 

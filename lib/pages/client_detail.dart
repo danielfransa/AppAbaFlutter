@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:aba_app/core/constants.dart';
+import 'package:aba_app/core/utils.dart';
 import 'package:aba_app/models/client.dart';
 import 'package:aba_app/widgets/list_protocol.dart';
 import 'package:flutter/material.dart';
 
 class ClientDetail extends StatelessWidget {
   const ClientDetail({super.key, required this.client});
-
   final Client client;
 
   @override
@@ -42,11 +42,11 @@ class ClientDetail extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Idade 8 anos',
-                style: TextStyle(
+                'Idade ${calculateAge(client.birthday)} anos',
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: Colors.grey,
@@ -157,3 +157,11 @@ class ClientDetail extends StatelessWidget {
     );
   }
 }
+
+
+// // Filtre a lista de protocolos com clients_id = 1
+//     List<Protocol> filteredProtocols = protocols.where((protocol) {
+//       return protocol.clientsId == 1;
+//     }).toList();
+
+// flutter pub run build_runner watch --delete-conflicting-outputs

@@ -1,5 +1,3 @@
-import 'package:aba_app/models/application.dart';
-import 'package:aba_app/models/client.dart';
 import 'package:faker/faker.dart';
 import 'dart:math';
 
