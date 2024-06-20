@@ -1,5 +1,5 @@
 import 'package:aba_app/data/protocol_data.dart';
-import 'package:aba_app/pages/application_line_chart.dart';
+import 'package:aba_app/pages/graph/application_line_chart.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationGraf extends StatelessWidget {

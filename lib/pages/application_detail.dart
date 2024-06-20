@@ -1,22 +1,17 @@
 import 'dart:convert';
 
 import 'package:aba_app/core/constants.dart';
-import 'package:aba_app/pages/protocol_graf.dart';
+import 'package:aba_app/pages/graph/protocol_graf.dart';
 import 'package:flutter/material.dart';
 
-class ProtocolStats extends StatefulWidget {
-  const ProtocolStats({super.key});
+class ApplicationDetail extends StatelessWidget {
+  const ApplicationDetail({super.key});
 
-  @override
-  State<ProtocolStats> createState() => _ProtocolStatsState();
-}
-
-class _ProtocolStatsState extends State<ProtocolStats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes do Protocolo'),
+        title: const Text('Detalhes da Aplicação'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

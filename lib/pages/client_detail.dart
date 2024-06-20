@@ -3,15 +3,21 @@ import 'dart:convert';
 import 'package:aba_app/core/constants.dart';
 import 'package:aba_app/core/utils.dart';
 import 'package:aba_app/models/client.dart';
+import 'package:aba_app/models/protocol.dart';
+import 'package:aba_app/provider/protocol_provider.dart';
 import 'package:aba_app/widgets/list_protocol.dart';
+import 'package:aba_app/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ClientDetail extends StatelessWidget {
+class ClientDetail extends ConsumerWidget {
   const ClientDetail({super.key, required this.client});
   final Client client;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var protocols = ref.watch(protocolsProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detalhes do Cliente'),
@@ -53,82 +59,6 @@ class ClientDetail extends StatelessWidget {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  elevation: 8,
-                  child: Container(
-                    width: 180,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '0',
-                            style: TextStyle(
-                              fontSize: 28,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            'Completados',
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        20.0), // Define a borda arredondada
-                  ),
-                  elevation: 8, // Sombra do card
-                  child: Container(
-                    width: 180,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.red, // Cor de fundo vermelha
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '0',
-                            style: TextStyle(
-                              fontSize: 28,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            'Abortados',
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Row(
@@ -148,7 +78,28 @@ class ClientDetail extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: ListView(children: createProtocolList(context)),
+                child: Flexible(
+                  child: protocols.when(
+                    data: (data) {
+                      List<Protocol> protocols = data.where((protocol) {
+                        return protocol.clientId == client.id;
+                      }).toList();
+                      return ListView.builder(
+                        itemCount: protocols.length,
+                        itemBuilder: (context, index) {
+                          final protocol = protocols[index];
+                          return ListProtocols(protocol: protocol);
+                        },
+                      );
+                    },
+                    error: (error, stackTrace) {
+                      return Center(
+                        child: Text(error.toString()),
+                      );
+                    },
+                    loading: () => const LoadingWidget(),
+                  ),
+                ),
               ),
             ),
           ],

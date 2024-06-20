@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:dio/dio.dart';
 
 part 'app_provider.g.dart';
 
@@ -7,3 +8,9 @@ part 'app_provider.g.dart';
 SupabaseClient supabaseClient(SupabaseClientRef ref) {
   return Supabase.instance.client;
 }
+
+final dioProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(baseUrl: 'https://moraislucas.github.io/MeMotive/phrases.json'),
+  ),
+);

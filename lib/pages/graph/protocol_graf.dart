@@ -1,5 +1,5 @@
 import 'package:aba_app/data/protocol_data.dart';
-import 'package:aba_app/pages/protocol_line_chart.dart';
+import 'package:aba_app/pages/graph/protocol_line_chart.dart';
 import 'package:flutter/material.dart';
 
 class ProtocolGraf extends StatelessWidget {

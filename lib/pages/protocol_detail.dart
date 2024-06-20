@@ -1,17 +1,36 @@
 import 'package:aba_app/models/protocol.dart';
-import 'package:aba_app/pages/application_graf.dart';
+import 'package:aba_app/pages/graph/application_graf.dart';
 import 'package:aba_app/pages/new_application.dart';
+import 'package:aba_app/provider/application_provider.dart';
 import 'package:aba_app/widgets/list_application.dart';
+import 'package:aba_app/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProtocolDetail extends StatelessWidget {
-  const ProtocolDetail(
-      {super.key, required this.protocol, required Protocol Protocol});
+class ProtocolDetail extends ConsumerWidget {
+  const ProtocolDetail({super.key, required this.protocols});
 
-  final Protocol protocol;
+  final Protocol protocols;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var applications = ref.watch(applicationsProvider(protocols.id));
+    var success = ref.watch(successProvider(protocols.id));
+    var fail = ref.watch(failProvider(protocols.id));
+
+    // List<Application> filteredAplication = applications.value!
+    //     .where((element) => element.protocolId == protocols.id)
+    //     .toList();
+
+    // var totaAplication = applications.value.length;
+    // int aborted = 0;
+
+    // for (var element in applications) {
+    //   if (element.aborted == true) {
+    //     aborted++;
+    //   }
+    // }
+
     return Scaffold(
       appBar: AppBar(title: const Text('Detalhes do Protocolo'), actions: [
         IconButton(
@@ -37,7 +56,7 @@ class ProtocolDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    protocol.name,
+                    protocols.name!,
                     style: const TextStyle(
                       fontSize: 34,
                       fontWeight: FontWeight.w600,
@@ -47,10 +66,106 @@ class ProtocolDetail extends StatelessWidget {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  elevation: 8,
+                  child: Container(
+                    width: 180,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            success.value == null
+                                ? '0'
+                                : success.value.toString(), //totals
+                            style: const TextStyle(
+                              fontSize: 28,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const Text(
+                            'Completados',
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        20.0), // Define a borda arredondada
+                  ),
+                  elevation: 8, // Sombra do card
+                  child: Container(
+                    width: 180,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.red, // Cor de fundo vermelha
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            fail.value == null
+                                ? '0'
+                                : fail.value.toString(), //abortados
+                            style: const TextStyle(
+                              fontSize: 28,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const Text(
+                            'Abortados',
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: ListView(children: createApplicationList(context)),
+                child: applications.when(
+                  data: (applications) {
+                    return ListView.builder(
+                      itemCount: applications.length,
+                      itemBuilder: (context, index) {
+                        final application = applications[index];
+                        return ListApplication(application: application);
+                      },
+                    );
+                  },
+                  error: (error, stackTrace) {
+                    return Center(
+                      child: Text(error.toString()),
+                    );
+                  },
+                  loading: () => const LoadingWidget(),
+                ),
               ),
             ),
           ],

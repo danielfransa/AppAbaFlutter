@@ -1,4 +1,5 @@
 import 'package:aba_app/pages/buscar.dart';
+import 'package:aba_app/pages/feed.dart';
 import 'package:aba_app/pages/perfil.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,7 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     const Buscar(),
     const Perfil(),
-    Container(color: Colors.white70),
+    const Feed(),
   ];
 
   @override
