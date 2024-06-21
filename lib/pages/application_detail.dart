@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:aba_app/core/constants.dart';
 import 'package:aba_app/pages/graph/protocol_graf.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ApplicationDetail extends StatelessWidget {
   const ApplicationDetail({super.key});
@@ -53,121 +55,127 @@ class ApplicationDetail extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 8,
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(40, 130, 158, 1),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Card(
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child: const Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '999',
-                                style: TextStyle(
-                                  fontSize: 64,
-                                  color: Colors.white,
+                        elevation: 8,
+                        child: Container(
+                          width: 120,
+                          height: 110,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(40, 130, 158, 1),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: const Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '999',
+                                  style: TextStyle(
+                                    fontSize: 64,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Text(
-                      'Consultas',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    )
-                  ],
+                      const Text(
+                        'Consultas',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                Column(
-                  children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            20.0), // Define a borda arredondada
-                      ),
-                      elevation: 8, // Sombra do card
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.blue, // Cor de fundo vermelha
-                          borderRadius: BorderRadius.circular(20.0),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Define a borda arredondada
                         ),
-                        child: const Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '999',
-                                style: TextStyle(
-                                  fontSize: 64,
-                                  color: Colors.white,
+                        elevation: 8, // Sombra do card
+                        child: Container(
+                          width: 120,
+                          height: 110,
+                          decoration: BoxDecoration(
+                            color: Colors.blue, // Cor de fundo vermelha
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: const Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '999',
+                                  style: TextStyle(
+                                    fontSize: 64,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Text(
-                      'Concluidas',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    )
-                  ],
+                      const Text(
+                        'Concluidas',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                Column(
-                  children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            20.0), // Define a borda arredondada
-                      ),
-                      elevation: 8, // Sombra do card
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.red, // Cor de fundo vermelha
-                          borderRadius: BorderRadius.circular(20.0),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Define a borda arredondada
                         ),
-                        child: const Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '999',
-                                style: TextStyle(
-                                  fontSize: 64,
-                                  color: Colors.white,
+                        elevation: 8, // Sombra do card
+                        child: Container(
+                          width: 120,
+                          height: 110,
+                          decoration: BoxDecoration(
+                            color: Colors.red, // Cor de fundo vermelha
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: const Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '999',
+                                  style: TextStyle(
+                                    fontSize: 64,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Text(
-                      'Abortados',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    )
-                  ],
+                      const Text(
+                        'Abortados',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

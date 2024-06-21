@@ -3,4 +3,5 @@ class Attempt {
   late String help;
   late String comments;
   late bool result;
+  late int protocolId;
 }

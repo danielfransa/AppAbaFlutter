@@ -1,5 +1,6 @@
 import 'package:aba_app/models/application.dart';
 import 'package:aba_app/provider/app_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'application_provider.g.dart';
@@ -38,3 +39,16 @@ final failProvider = FutureProvider.family<int, int>((ref, protocolId) async {
 
   return response.length;
 });
+
+final applicationProvider =
+    StateNotifierProvider<ApplicationNotifier, List<Application>>((ref) {
+  return ApplicationNotifier();
+});
+
+class ApplicationNotifier extends StateNotifier<List<Application>> {
+  ApplicationNotifier() : super([]);
+
+  void addApplication(Application application) {
+    state = [...state, application];
+  }
+}

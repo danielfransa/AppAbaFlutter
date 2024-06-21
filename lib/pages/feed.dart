@@ -9,9 +9,6 @@ class Feed extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var quotes = ref.watch(phrasesProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quotes'),
-      ),
       body: ListView.builder(
         itemCount: quotes.length,
         itemBuilder: (context, index) {
