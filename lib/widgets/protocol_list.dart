@@ -15,7 +15,7 @@ class ProtocolList extends ConsumerWidget {
         data: (data) => ListView.builder(
           itemCount: data.length,
           itemBuilder: (context, index) {
-            return ListTile(
+            return const ListTile(
               title: Text('data[index].name!'),
             );
           },

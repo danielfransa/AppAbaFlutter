@@ -8,28 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProtocolDetail extends ConsumerWidget {
-  const ProtocolDetail({super.key, required this.protocols});
+  const ProtocolDetail({super.key, required this.protocol});
 
-  final Protocol protocols;
+  final Protocol protocol;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var applications = ref.watch(applicationsProvider(protocols.id));
-    var success = ref.watch(successProvider(protocols.id));
-    var fail = ref.watch(failProvider(protocols.id));
-
-    // List<Application> filteredAplication = applications.value!
-    //     .where((element) => element.protocolId == protocols.id)
-    //     .toList();
-
-    // var totaAplication = applications.value.length;
-    // int aborted = 0;
-
-    // for (var element in applications) {
-    //   if (element.aborted == true) {
-    //     aborted++;
-    //   }
-    // }
+    var applications = ref.watch(applicationsProvider(protocol.id));
+    var success = ref.watch(successProvider(protocol.id));
+    var fail = ref.watch(failProvider(protocol.id));
 
     return Scaffold(
       appBar: AppBar(title: const Text('Detalhes do Protocolo'), actions: [
@@ -56,7 +43,7 @@ class ProtocolDetail extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    protocols.name!,
+                    protocol.name!,
                     style: const TextStyle(
                       fontSize: 34,
                       fontWeight: FontWeight.w600,
@@ -176,7 +163,9 @@ class ProtocolDetail extends ConsumerWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: ((context) => const NewApplication()),
+              builder: ((context) => NewApplication(
+                    protocol: protocol,
+                  )),
             ),
           );
         },

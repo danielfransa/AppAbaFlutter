@@ -9,9 +9,9 @@ class PhrasesModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
-      'quote': this.quote,
-      'author': this.author,
+      'id': id,
+      'quote': quote,
+      'author': author,
     };
   }
 

@@ -2,9 +2,7 @@ import 'dart:convert';
 
 import 'package:aba_app/core/constants.dart';
 import 'package:aba_app/pages/graph/protocol_graf.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ApplicationDetail extends StatelessWidget {
   const ApplicationDetail({super.key});

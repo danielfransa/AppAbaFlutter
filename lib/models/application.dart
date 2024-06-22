@@ -1,3 +1,4 @@
+import 'package:aba_app/models/attempt.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'application.g.dart';
@@ -5,7 +6,7 @@ part 'application.g.dart';
 @JsonSerializable()
 class Application {
   @JsonKey(name: 'id')
-  final int id;
+  final int? id;
   @JsonKey(name: 'protocol_id')
   final int protocolId;
   @JsonKey(name: 'positive_percentage')
@@ -24,7 +25,7 @@ class Application {
   final String? reasonAbortion;
 
   Application(
-      {required this.id,
+      {this.id,
       required this.protocolId,
       required this.positivePercentage,
       required this.success,
@@ -41,6 +42,6 @@ class Application {
 
   @override
   String toString() {
-    return 'Protocol(id: $id, protocol_id: $protocolId, positive_percentage: $positivePercentage, success: $success, failure: $failure, created_at: $createdAt, created_by: $createdBy, aborted: $aborted, reason_abortion: $reasonAbortion )';
+    return 'Protocol(id: $id, protocol_id: $protocolId, positive_percentage: $positivePercentage, success: $success, failure: $failure, created_at: $createdAt, created_by: $createdBy, aborted: $aborted, reason_abortion: $reasonAbortion)';
   }
 }

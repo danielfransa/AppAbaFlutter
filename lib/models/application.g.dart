@@ -7,7 +7,7 @@ part of 'application.dart';
 // **************************************************************************
 
 Application _$ApplicationFromJson(Map<String, dynamic> json) => Application(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       protocolId: (json['protocol_id'] as num).toInt(),
       positivePercentage: (json['positive_percentage'] as num).toDouble(),
       success: (json['success'] as num).toInt(),

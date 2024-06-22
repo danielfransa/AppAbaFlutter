@@ -1,11 +1,16 @@
 import 'dart:math';
 
+import 'package:aba_app/core/utils.dart';
+import 'package:aba_app/models/create_attempt.dart';
+import 'package:aba_app/models/protocol.dart';
+import 'package:aba_app/pages/protocol_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class NewApplication extends StatefulWidget {
-  const NewApplication({super.key});
+  const NewApplication({super.key, required this.protocol});
+  final Protocol protocol;
+
   static List<String> status = ['Sucesso', 'Falha'];
 
   @override
@@ -35,6 +40,50 @@ class _NewApplicationState extends State<NewApplication> {
     print('A Observação foi: $observationData');
   }
 
+  int tentativa = 1;
+  late List<CreateAttempt> attempts = [];
+
+  void _createAttempts() {
+    if (tentativa == 10) {
+      attempts.add(CreateAttempt(
+          attemptNumber: tentativa,
+          result: _statusSelecionado == "Sucesso" ? true : false,
+          help: _tipController.text,
+          comments: _ObservationController.text));
+
+      _statusSelecionado = NewApplication.status.first;
+      _tipController.text = "";
+      _ObservationController.text = "";
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProtocolDetail(protocol: widget.protocol),
+        ),
+      );
+      tentativa = 1;
+      createApplication(
+        paramProtocolId: widget.protocol.id,
+        paramReasonAbortion: "",
+        paramAttempts: attempts,
+      );
+      // lembre-se de limpar o attempts;
+      attempts = [];
+    } else {
+      attempts.add(CreateAttempt(
+          attemptNumber: tentativa,
+          result: _statusSelecionado == "Sucesso" ? true : false,
+          help: _tipController.text,
+          comments: _ObservationController.text));
+
+      _statusSelecionado = NewApplication.status.first;
+      _tipController.text = "";
+      _ObservationController.text = "";
+
+      tentativa++;
+    }
+  }
+
+  var createAt = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +98,7 @@ class _NewApplicationState extends State<NewApplication> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 28.0, 8.0, 8.0),
                 child: Text(
-                  "Aplicação - ${dateFormat.format(DateTime.now())}",
+                  "Aplicação - ${dateFormat.format(createAt)}",
                   style: const TextStyle(
                       fontSize: 24, fontWeight: FontWeight.w600),
                 ),
@@ -61,7 +110,7 @@ class _NewApplicationState extends State<NewApplication> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8.0, 8.0, 28.0, 8.0),
                   child: Text(
-                    "Tentativa - $random de 10",
+                    "Tentativa - $tentativa de 10",
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),
@@ -119,7 +168,6 @@ class _NewApplicationState extends State<NewApplication> {
             OutlinedButton(
               onPressed: () {},
               style: OutlinedButton.styleFrom(
-                fixedSize: const Size(400, 75),
                 foregroundColor: Colors.red,
                 side: const BorderSide(color: Colors.red),
                 shape: RoundedRectangleBorder(
@@ -138,9 +186,12 @@ class _NewApplicationState extends State<NewApplication> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _createAttempts();
+                });
+              },
               style: ElevatedButton.styleFrom(
-                fixedSize: const Size(400, 75),
                 foregroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),

@@ -6,7 +6,7 @@ part of 'phrases_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$phrasesHash() => r'f282956aa0bdec79041f39a88a05a953e00b1931';
+String _$phrasesHash() => r'e35a0c721a82e9d728586150d0da4155107fc907';
 
 /// See also [Phrases].
 @ProviderFor(Phrases)

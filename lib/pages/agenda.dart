@@ -2,7 +2,7 @@ import 'package:aba_app/models/client.dart';
 import 'package:flutter/material.dart';
 
 class Agenda extends StatelessWidget {
-  Agenda({super.key});
+  const Agenda({super.key});
 
   final client = Client;
 

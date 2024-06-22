@@ -16,7 +16,7 @@ class ListProtocols extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: ((context) => ProtocolDetail(
-                    protocols: protocol,
+                    protocol: protocol,
                   )),
             ),
           );

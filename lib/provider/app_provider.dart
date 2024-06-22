@@ -14,3 +14,9 @@ final dioProvider = Provider(
     BaseOptions(baseUrl: 'https://moraislucas.github.io/MeMotive/phrases.json'),
   ),
 );
+
+final createApplication = Provider(
+  (ref) => Dio(
+    BaseOptions(baseUrl: 'http://54.145.194.199:8080'),
+  ),
+);
