@@ -9,12 +9,11 @@ part 'add_application_provider.g.dart';
 class AddApplication extends _$AddApplication {
   @override
   List<CreateApplication> build() {
-    final CreateApplication application;
     return [];
   }
 
-  void addApplication(paramsJson) async {
-    var dio = ref.read(createApplication);
+  Future<void> addApplication(Map<String, dynamic> paramsJson) async {
+    var dio = ref.read(createApplicationProvider);
 
     try {
       var response = await dio.post('/application', data: paramsJson);

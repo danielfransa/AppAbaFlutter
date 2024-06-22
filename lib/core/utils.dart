@@ -1,7 +1,6 @@
 import 'package:aba_app/models/create_application.dart';
 import 'package:aba_app/models/create_attempt.dart';
-import 'package:aba_app/provider/app_provider.dart';
-import 'package:aba_app/provider/add_application_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 int calculateAge(DateTime birthDate) {
   DateTime today = DateTime.now();
@@ -13,10 +12,11 @@ int calculateAge(DateTime birthDate) {
   return age;
 }
 
-void createApplication(
+Map<String, dynamic> createApplication(
     {required int paramProtocolId,
     String? paramReasonAbortion,
     required List<CreateAttempt> paramAttempts}) {
+  //Variaveis
   List<CreateAttempt> attempts = paramAttempts;
   int success = 0;
   int failure = 0;
@@ -51,5 +51,5 @@ void createApplication(
       reasonAbortion: paramReasonAbortion,
       attempts: attempts);
 
-  application.toJson();
+  return application.toJson();
 }

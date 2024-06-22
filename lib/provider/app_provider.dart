@@ -15,7 +15,7 @@ final dioProvider = Provider(
   ),
 );
 
-final createApplication = Provider(
+final createApplicationProvider = Provider(
   (ref) => Dio(
     BaseOptions(baseUrl: 'http://54.145.194.199:8080'),
   ),

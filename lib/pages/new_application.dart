@@ -4,7 +4,9 @@ import 'package:aba_app/core/utils.dart';
 import 'package:aba_app/models/create_attempt.dart';
 import 'package:aba_app/models/protocol.dart';
 import 'package:aba_app/pages/protocol_detail.dart';
+import 'package:aba_app/provider/add_application_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 class NewApplication extends StatefulWidget {
@@ -18,54 +20,63 @@ class NewApplication extends StatefulWidget {
 }
 
 class _NewApplicationState extends State<NewApplication> {
-  final DateFormat dateFormat = DateFormat('dd/MM/yy - HH:mm');
-
-  final random = Random().nextInt(10);
+  final DateFormat dateFormat = DateFormat('dd/MM/yy');
 
   String? _statusSelecionado = NewApplication.status.first;
 
   final _tipController = TextEditingController();
 
-  void _onTip() {
-    final tipData = _tipController.text;
-    // Realize a pesquisa com o termo digitado
-    print('A Dica foi: $tipData');
-  }
+  // void _onTip() {
+  //   final tipData = _tipController.text;
+  //   // Realize a pesquisa com o termo digitado
+  //   print('A Dica foi: $tipData');
+  // }
 
-  final _ObservationController = TextEditingController();
+  final _observationController = TextEditingController();
 
-  void _onObservtion() {
-    final observationData = _ObservationController.text;
-    // Realize a pesquisa com o termo digitado
-    print('A Observação foi: $observationData');
-  }
+  // void _onObservtion() {
+  //   final observationData = _ObservationController.text;
+  //   // Realize a pesquisa com o termo digitado
+  //   print('A Observação foi: $observationData');
+  // }
 
   int tentativa = 1;
-  late List<CreateAttempt> attempts = [];
+  List<CreateAttempt> attempts = [];
 
-  void _createAttempts() {
+  void _createAttempts() async {
     if (tentativa == 10) {
       attempts.add(CreateAttempt(
           attemptNumber: tentativa,
           result: _statusSelecionado == "Sucesso" ? true : false,
           help: _tipController.text,
-          comments: _ObservationController.text));
+          comments: _observationController.text));
 
       _statusSelecionado = NewApplication.status.first;
       _tipController.text = "";
-      _ObservationController.text = "";
+      _observationController.text = "";
+
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ProtocolDetail(protocol: widget.protocol),
         ),
       );
+
       tentativa = 1;
-      createApplication(
+
+      Map<String, dynamic> applicationJson = createApplication(
         paramProtocolId: widget.protocol.id,
         paramReasonAbortion: "",
         paramAttempts: attempts,
       );
+
+      // Obter a instância do AddApplication
+      final container = ProviderContainer();
+      final addApplication = container.read(addApplicationProvider.notifier);
+
+      // Enviar a aplicação para o servidor
+      await addApplication.addApplication(applicationJson);
+
       // lembre-se de limpar o attempts;
       attempts = [];
     } else {
@@ -73,17 +84,18 @@ class _NewApplicationState extends State<NewApplication> {
           attemptNumber: tentativa,
           result: _statusSelecionado == "Sucesso" ? true : false,
           help: _tipController.text,
-          comments: _ObservationController.text));
+          comments: _observationController.text));
 
       _statusSelecionado = NewApplication.status.first;
       _tipController.text = "";
-      _ObservationController.text = "";
+      _observationController.text = "";
 
       tentativa++;
     }
   }
 
   var createAt = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +167,7 @@ class _NewApplicationState extends State<NewApplication> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               child: TextField(
-                controller: _ObservationController,
+                controller: _observationController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
