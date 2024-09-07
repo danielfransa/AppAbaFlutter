@@ -1,0 +1,224 @@
+import 'dart:math';
+
+import 'package:aba_app/core/utils.dart';
+import 'package:aba_app/models/create_attempt.dart';
+import 'package:aba_app/models/protocol.dart';
+import 'package:aba_app/pages/protocol_detail.dart';
+import 'package:aba_app/provider/add_application_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
+class NewApplication extends StatefulWidget {
+  const NewApplication({super.key, required this.protocol});
+  final Protocol protocol;
+
+  static List<String> status = ['Sucesso', 'Falha'];
+
+  @override
+  State<NewApplication> createState() => _NewApplicationState();
+}
+
+class _NewApplicationState extends State<NewApplication> {
+  final DateFormat dateFormat = DateFormat('dd/MM/yy');
+
+  String? _statusSelecionado = NewApplication.status.first;
+
+  final _tipController = TextEditingController();
+
+  // void _onTip() {
+  //   final tipData = _tipController.text;
+  //   // Realize a pesquisa com o termo digitado
+  //   print('A Dica foi: $tipData');
+  // }
+
+  final _observationController = TextEditingController();
+
+  // void _onObservtion() {
+  //   final observationData = _ObservationController.text;
+  //   // Realize a pesquisa com o termo digitado
+  //   print('A Observação foi: $observationData');
+  // }
+
+  int tentativa = 1;
+  List<CreateAttempt> attempts = [];
+
+  void _createAttempts() async {
+    if (tentativa == 10) {
+      attempts.add(CreateAttempt(
+          attemptNumber: tentativa,
+          result: _statusSelecionado == "Sucesso" ? true : false,
+          help: _tipController.text,
+          comments: _observationController.text));
+
+      _statusSelecionado = NewApplication.status.first;
+      _tipController.text = "";
+      _observationController.text = "";
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProtocolDetail(protocol: widget.protocol),
+        ),
+      );
+
+      tentativa = 1;
+
+      Map<String, dynamic> applicationJson = createApplication(
+        paramProtocolId: widget.protocol.id,
+        paramReasonAbortion: "",
+        paramAttempts: attempts,
+      );
+
+      // // Obter a instância do AddApplication
+      // final container = ProviderContainer();
+      // final addApplication = container.read(addApplicationProvider.notifier);
+
+      // // Enviar a aplicação para o servidor
+      // await addApplication.addApplication(applicationJson);
+
+      // lembre-se de limpar o attempts;
+      attempts = [];
+    } else {
+      attempts.add(CreateAttempt(
+          attemptNumber: tentativa,
+          result: _statusSelecionado == "Sucesso" ? true : false,
+          help: _tipController.text,
+          comments: _observationController.text));
+
+      _statusSelecionado = NewApplication.status.first;
+      _tipController.text = "";
+      _observationController.text = "";
+
+      tentativa++;
+    }
+  }
+
+  var createAt = DateTime.now();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Novo Protocolo'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 28.0, 8.0, 8.0),
+                child: Text(
+                  "Aplicação - ${dateFormat.format(createAt)}",
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 8.0, 28.0, 8.0),
+                  child: Text(
+                    "Tentativa - $tentativa de 10",
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: NewApplication.status
+                  .map((p) => Expanded(
+                        child: ListTile(
+                          leading: Radio<String>(
+                            value: p,
+                            groupValue: _statusSelecionado,
+                            onChanged: (value) {
+                              setState(() {
+                                _statusSelecionado = value;
+                              });
+                            },
+                          ),
+                          title: Text(
+                            p,
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(height: 40),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              child: TextField(
+                controller: _tipController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  labelText: 'Foi dada alguma ajuda',
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              child: TextField(
+                controller: _observationController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  labelText: 'Observação',
+                ),
+              ),
+            ),
+            const SizedBox(height: 60),
+            OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.red,
+                side: const BorderSide(color: Colors.red),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+              ),
+              child: const Text(
+                'Abortar',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _createAttempts();
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+              ),
+              child: const Text(
+                'Completo',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
