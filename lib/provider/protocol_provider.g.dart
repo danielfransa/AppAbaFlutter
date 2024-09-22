@@ -6,7 +6,7 @@ part of 'protocol_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$protocolsHash() => r'f69930dd99a2603f54ca24b234a27b7672d964d5';
+String _$protocolsHash() => r'7809ba4e5576262a0effcdfcea943b188c9ae6b3';
 
 /// See also [protocols].
 @ProviderFor(protocols)

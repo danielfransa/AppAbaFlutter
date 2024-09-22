@@ -1,16 +1,24 @@
-# aba_app
+# Projeto ABA - Aplicativo Mobile
 
-A new Flutter project.
+Este é o aplicativo mobile do projeto ABA. O aplicativo foi desenvolvido para proporcionar uma interface intuitiva e funcional para os usuários que desejam interagir com o sistema ABA.
 
-## Getting Started
+## Dependências
 
-This project is a starting point for a Flutter application.
+Para que o aplicativo funcione corretamente, ele depende de uma API de backend. Certifique-se de que a API esteja em funcionamento antes de executar o aplicativo.
 
-A few resources to get you started if this is your first Flutter project:
+## Configuração
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Base URL
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Dependendo de como você estiver executando o aplicativo (emulador ou dispositivo físico), a `baseUrl` no arquivo `App_provider` deve ser ajustada. 
+
+- Para **emuladores**, a base URL geralmente deve apontar para `http://10.0.2.2:PORTA`, onde `PORTA` é a porta em que sua API está rodando.
+- Para **dispositivos físicos**, você precisará usar o endereço IP local da sua máquina, algo como `http://192.168.X.X:PORTA`.
+
+### Instruções para Configurar a API
+
+1. Clone o repositório da API backend em sua máquina local.
+2. Siga as instruções de configuração do repositório da API para garantir que ela esteja rodando corretamente.
+3. Ajuste a `baseUrl` no arquivo `App_provider` do aplicativo mobile para corresponder ao endereço da API.
+
+

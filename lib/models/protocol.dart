@@ -6,27 +6,22 @@ part 'protocol.g.dart';
 class Protocol {
   @JsonKey(name: 'id')
   final int id;
-  @JsonKey(name: 'client_id')
+  @JsonKey(name: 'clientId')
   final int clientId;
   @JsonKey(name: "name")
   final String? name;
-  @JsonKey(name: "created_by")
-  final String? createBy;
+  @JsonKey(name: "createdBy")
+  final String? createdBy;
 
   Protocol({
     required this.id,
     required this.clientId,
     required this.name,
-    required this.createBy,
+    required this.createdBy,
   });
 
   factory Protocol.fromJson(Map<String, dynamic> json) =>
       _$ProtocolFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProtocolToJson(this);
-
-  @override
-  String toString() {
-    return 'Protocol(id: $id, client_id: $clientId, name: $name, created_by: $createBy)';
-  }
 }

@@ -71,24 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
             selectedIcon: FaIcon(FontAwesomeIcons.solidCalendarCheck),
           ),
         ],
-        // items: const [
-        //   BottomNavigationBarItem(
-        //     icon: FaIcon(FontAwesomeIcons.calendar),
-        //     label: 'Buscar',
-        //   ),
-        //   // BottomNavigationBarItem(
-        //   //   icon: Icon(Icons.calendar_month),
-        //   //   label: 'Agenda',
-        //   // ),
-        //   BottomNavigationBarItem(
-        //     icon: Icon(Icons.person),
-        //     label: 'Perfil',
-        //   ),
-        //   BottomNavigationBarItem(
-        //     icon: Icon(Icons.feed),
-        //     label: 'Feed',
-        //   )
-        // ],
       ),
     );
   }

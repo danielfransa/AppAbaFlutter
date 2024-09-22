@@ -15,8 +15,11 @@ final dioProvider = Provider(
   ),
 );
 
-final createApplicationProvider = Provider(
+final apiProvider = Provider(
   (ref) => Dio(
-    BaseOptions(baseUrl: 'http://54.145.194.199:8080'),
+    BaseOptions(baseUrl: 'http://192.168.0.112:8080'),
   ),
 );
+
+
+// OBS: lembrar que dependendo do emulador muda essa ip  do apiProvider nesse caso meu computador na rede era esse ip usando celular fisico como emulador

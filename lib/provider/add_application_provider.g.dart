@@ -6,7 +6,7 @@ part of 'add_application_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addApplicationHash() => r'711a1f32629f902d818bcdb752b8176aeb16c7b1';
+String _$addApplicationHash() => r'708cb145b730fb6e1096730d57533a9f4318e01a';
 
 /// See also [AddApplication].
 @ProviderFor(AddApplication)

@@ -8,25 +8,35 @@ part of 'application.dart';
 
 Application _$ApplicationFromJson(Map<String, dynamic> json) => Application(
       id: (json['id'] as num?)?.toInt(),
-      protocolId: (json['protocol_id'] as num).toInt(),
-      positivePercentage: (json['positive_percentage'] as num).toDouble(),
+      positivePercentage: (json['positivePercentage'] as num).toDouble(),
       success: (json['success'] as num).toInt(),
       failure: (json['failure'] as num).toInt(),
-      createdAt: DateTime.parse(json['created_at'] as String),
-      createdBy: json['created_by'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdBy: json['createdBy'] as String,
       aborted: json['aborted'] as bool?,
-      reasonAbortion: json['reason_abortion'] as String?,
+      reasonAbortion: json['reasonAbortion'] as String?,
+      attempts: (json['attempts'] as List<dynamic>)
+          .map((e) => Attempt.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$ApplicationToJson(Application instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'protocol_id': instance.protocolId,
-      'positive_percentage': instance.positivePercentage,
-      'success': instance.success,
-      'failure': instance.failure,
-      'created_at': instance.createdAt.toIso8601String(),
-      'created_by': instance.createdBy,
-      'aborted': instance.aborted,
-      'reason_abortion': instance.reasonAbortion,
-    };
+Map<String, dynamic> _$ApplicationToJson(Application instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['positivePercentage'] = instance.positivePercentage;
+  val['success'] = instance.success;
+  val['failure'] = instance.failure;
+  val['createdBy'] = instance.createdBy;
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  writeNotNull('aborted', instance.aborted);
+  writeNotNull('reasonAbortion', instance.reasonAbortion);
+  val['attempts'] = instance.attempts;
+  return val;
+}

@@ -15,8 +15,8 @@ class ProtocolDetail extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var applications = ref.watch(applicationsProvider(protocol.id));
-    var success = ref.watch(successProvider(protocol.id));
-    var fail = ref.watch(failProvider(protocol.id));
+    var success = ref.watch(successProvider);
+    var fail = ref.watch(failProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Detalhes do Protocolo'), actions: [
@@ -73,9 +73,7 @@ class ProtocolDetail extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            success.value == null
-                                ? '0'
-                                : success.value.toString(), //totals
+                            success.toString(), //totals
                             style: const TextStyle(
                               fontSize: 28,
                               color: Colors.white,
@@ -111,9 +109,7 @@ class ProtocolDetail extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            fail.value == null
-                                ? '0'
-                                : fail.value.toString(), //abortados
+                            fail.toString(), //abortados
                             style: const TextStyle(
                               fontSize: 28,
                               color: Colors.white,

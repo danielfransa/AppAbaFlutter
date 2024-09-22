@@ -1,6 +1,5 @@
 import 'package:aba_app/models/create_application.dart';
 import 'package:aba_app/models/create_attempt.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 int calculateAge(DateTime birthDate) {
   DateTime today = DateTime.now();
@@ -51,7 +50,7 @@ Map<String, dynamic> createApplication(
       reasonAbortion: paramReasonAbortion,
       attempts: attempts);
 
-  print(application.toJson());
+  print(application.toJson()); // Lembrar de remover isso aqui:
 
   return application.toJson();
 }

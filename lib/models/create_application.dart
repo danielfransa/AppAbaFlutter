@@ -1,4 +1,3 @@
-import 'package:aba_app/models/attempt.dart';
 import 'package:aba_app/models/create_attempt.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -37,9 +36,4 @@ class CreateApplication {
       _$CreateApplicationFromJson(json);
 
   Map<String, dynamic> toJson() => _$CreateApplicationToJson(this);
-
-  @override
-  String toString() {
-    return 'Protocol(protocolId: $protocolId, positivePercentage: $positivePercentage, success: $success, failure: $failure,  createdBy: $createdBy, aborted: $aborted, reasonAbortion: $reasonAbortion)';
-  }
 }

@@ -14,25 +14,16 @@ class Client {
   final DateTime birthday;
   @JsonKey(name: 'email')
   final String email;
-  @JsonKey(name: 'imageData')
-  final String? imageData;
 
-  Client({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.birthday,
-    this.imageData,
-  });
+  Client(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.birthday});
 
   factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
 
   Map<String, dynamic> toJson() => _$ClientToJson(this);
-
-  @override
-  String toString() {
-    return 'Client(id: $id, name: $name, email: $email, birthday: $birthday, imageData: $imageData)';
-  }
 }
 
 // flutter pub run build_runner watch --delete-conflicting-outputs

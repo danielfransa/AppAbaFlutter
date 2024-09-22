@@ -5,50 +5,45 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'application_provider.g.dart';
 
+int success = 0;
+int fail = 0;
+
 @riverpod
 FutureOr<List<Application>> applications(
     ApplicationsRef ref, int protocolId) async {
-  final response = await ref
-      .watch(supabaseClientProvider)
-      .from('applications')
-      .select('*')
-      .eq("protocol_id", protocolId);
+  // Obtém a instância do Dio do apiProvider
+  final dio = ref.watch(apiProvider);
 
-  return [for (final a in response) Application.fromJson(a)];
-}
+  // Fazendo a requisição GET para a API
+  final response = await dio.get('/application/protocol/$protocolId');
 
-final successProvider =
-    FutureProvider.family<int, int>((ref, protocolId) async {
-  final response = await ref
-      .watch(supabaseClientProvider)
-      .from('applications')
-      .select('*')
-      .eq('aborted', false)
-      .eq('protocol_id', protocolId);
+  // Verificando se a requisição foi bem-sucedida
+  if (response.statusCode == 200) {
+    final List<dynamic> responseData = response.data;
 
-  return response.length;
-});
+    // Convertendo os dados para a lista de Application
+    final applications =
+        responseData.map((c) => Application.fromJson(c)).toList();
 
-final failProvider = FutureProvider.family<int, int>((ref, protocolId) async {
-  final response = await ref
-      .watch(supabaseClientProvider)
-      .from('applications')
-      .select('*')
-      .eq('aborted', true)
-      .eq('protocol_id', protocolId);
+    // Itera sobre cada application
+    success = 0;
+    fail = 0;
+    for (var app in applications) {
+      if (app.aborted == true) {
+        fail += 1;
+      } else {
+        success += 1;
+      }
+    }
+    // Atualiza os valores dos providers de sucesso e falha
+    ref.read(successProvider.notifier).state = success;
+    ref.read(failProvider.notifier).state = fail;
 
-  return response.length;
-});
-
-final applicationProvider =
-    StateNotifierProvider<ApplicationNotifier, List<Application>>((ref) {
-  return ApplicationNotifier();
-});
-
-class ApplicationNotifier extends StateNotifier<List<Application>> {
-  ApplicationNotifier() : super([]);
-
-  void addApplication(Application application) {
-    state = [...state, application];
+    return applications;
+  } else {
+    throw Exception('Erro ao buscar aplicações da API');
   }
 }
+
+final successProvider = StateProvider<int>((ref) => 0);
+final failProvider = StateProvider<int>((ref) => 0);
