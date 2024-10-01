@@ -18,6 +18,7 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) => Application(
       attempts: (json['attempts'] as List<dynamic>)
           .map((e) => Attempt.fromJson(e as Map<String, dynamic>))
           .toList(),
+      protocolId: (json['protocolId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ApplicationToJson(Application instance) {
@@ -37,6 +38,7 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) {
   val['createdAt'] = instance.createdAt.toIso8601String();
   writeNotNull('aborted', instance.aborted);
   writeNotNull('reasonAbortion', instance.reasonAbortion);
+  writeNotNull('protocolId', instance.protocolId);
   val['attempts'] = instance.attempts;
   return val;
 }

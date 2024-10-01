@@ -1,5 +1,5 @@
-import 'package:aba_app/models/create_application.dart';
-import 'package:aba_app/models/create_attempt.dart';
+import 'package:aba_app/models/application.dart';
+import 'package:aba_app/models/attempt.dart';
 
 int calculateAge(DateTime birthDate) {
   DateTime today = DateTime.now();
@@ -14,14 +14,14 @@ int calculateAge(DateTime birthDate) {
 Map<String, dynamic> createApplication(
     {required int paramProtocolId,
     String? paramReasonAbortion,
-    required List<CreateAttempt> paramAttempts}) {
+    required List<Attempt> paramAttempts}) {
   //Variaveis
-  List<CreateAttempt> attempts = paramAttempts;
+  List<Attempt> attempts = paramAttempts;
   int success = 0;
   int failure = 0;
   double positivePercentage = 0.0;
   bool aborted = false;
-  CreateApplication application;
+  Application application;
 
   //Calcula Success e Failure
   for (var element in attempts) {
@@ -40,7 +40,7 @@ Map<String, dynamic> createApplication(
     aborted = true;
   }
 
-  application = CreateApplication(
+  application = Application(
       protocolId: paramProtocolId,
       positivePercentage: positivePercentage,
       success: success,
@@ -48,7 +48,8 @@ Map<String, dynamic> createApplication(
       createdBy: "MobileApp",
       aborted: aborted,
       reasonAbortion: paramReasonAbortion,
-      attempts: attempts);
+      attempts: attempts,
+      createdAt: DateTime.now().subtract(const Duration(hours: 3)));
 
   print(application.toJson()); // Lembrar de remover isso aqui:
 

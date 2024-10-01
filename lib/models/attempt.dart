@@ -5,7 +5,7 @@ part 'attempt.g.dart';
 @JsonSerializable()
 class Attempt {
   @JsonKey(name: 'id')
-  final int id;
+  final int? id;
   @JsonKey(name: 'attemptNumber')
   final int attemptNumber;
   @JsonKey(name: 'help')
@@ -16,7 +16,7 @@ class Attempt {
   final bool result;
 
   Attempt({
-    required this.id,
+    this.id,
     required this.attemptNumber,
     this.help,
     this.comments,

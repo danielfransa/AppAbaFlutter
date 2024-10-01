@@ -1,3 +1,4 @@
+import 'package:aba_app/models/client.dart';
 import 'package:aba_app/models/protocol.dart';
 import 'package:aba_app/pages/graph/application_graf.dart';
 import 'package:aba_app/pages/new_application.dart';
@@ -8,9 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProtocolDetail extends ConsumerWidget {
-  const ProtocolDetail({super.key, required this.protocol});
+  const ProtocolDetail(
+      {super.key, required this.protocol, required this.client});
 
   final Protocol protocol;
+  final Client client;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -7,7 +7,7 @@ part of 'attempt.dart';
 // **************************************************************************
 
 Attempt _$AttemptFromJson(Map<String, dynamic> json) => Attempt(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       attemptNumber: (json['attemptNumber'] as num).toInt(),
       help: json['help'] as String?,
       comments: json['comments'] as String?,

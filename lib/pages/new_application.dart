@@ -1,5 +1,5 @@
 import 'package:aba_app/core/utils.dart';
-import 'package:aba_app/models/create_attempt.dart';
+import 'package:aba_app/models/attempt.dart';
 import 'package:aba_app/models/protocol.dart';
 import 'package:aba_app/pages/protocol_detail.dart';
 import 'package:aba_app/provider/add_application_provider.dart';
@@ -31,11 +31,11 @@ class _NewApplicationState extends State<NewApplication> {
   final _observationController = TextEditingController();
 
   int tentativa = 1;
-  List<CreateAttempt> attempts = [];
+  List<Attempt> attempts = [];
 
   void _createAttempts(WidgetRef ref) async {
     if (tentativa == 10) {
-      attempts.add(CreateAttempt(
+      attempts.add(Attempt(
           attemptNumber: tentativa,
           result: _statusSelecionado == "Sucesso" ? true : false,
           help: _tipController.text,
@@ -44,13 +44,6 @@ class _NewApplicationState extends State<NewApplication> {
       _statusSelecionado = NewApplication.status.first;
       _tipController.text = "";
       _observationController.text = "";
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProtocolDetail(protocol: widget.protocol),
-        ),
-      );
 
       tentativa = 1;
 
@@ -62,12 +55,15 @@ class _NewApplicationState extends State<NewApplication> {
 
       await ref
           .read(addApplicationProvider.notifier)
-          .addApplication(applicationJson);
+          .addApplication(applicationJson, widget.protocol.id);
 
       // lembre-se de limpar o attempts;
       attempts = [];
+
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
     } else {
-      attempts.add(CreateAttempt(
+      attempts.add(Attempt(
           attemptNumber: tentativa,
           result: _statusSelecionado == "Sucesso" ? true : false,
           help: _tipController.text,

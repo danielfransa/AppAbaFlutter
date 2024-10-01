@@ -88,7 +88,10 @@ class ClientDetail extends ConsumerWidget {
                         itemCount: protocols.length,
                         itemBuilder: (context, index) {
                           final protocol = protocols[index];
-                          return ListProtocols(protocol: protocol);
+                          return ListProtocols(
+                            protocol: protocol,
+                            client: client,
+                          );
                         },
                       );
                     },
