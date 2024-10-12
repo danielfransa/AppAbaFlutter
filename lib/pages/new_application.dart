@@ -1,7 +1,6 @@
 import 'package:aba_app/core/utils.dart';
 import 'package:aba_app/models/attempt.dart';
 import 'package:aba_app/models/protocol.dart';
-import 'package:aba_app/pages/protocol_detail.dart';
 import 'package:aba_app/provider/add_application_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,8 +8,6 @@ import 'package:intl/intl.dart';
 
 /// TODO:
 /// - Criar funcinalidade de Abortar
-/// - Quando termina de aplicar a tela não esta sendo recarregada
-/// - Após aplicar ao clicar em voltar ele volta para nova aplicação
 
 class NewApplication extends StatefulWidget {
   const NewApplication({super.key, required this.protocol});
