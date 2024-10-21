@@ -17,7 +17,7 @@ final dioProvider = Provider(
 
 final apiProvider = Provider(
   (ref) => Dio(
-    BaseOptions(baseUrl: 'http://192.168.0.112:8080'),
+    BaseOptions(baseUrl: 'https://fatec-aba-project-backend.onrender.com'),
   ),
 );
 
