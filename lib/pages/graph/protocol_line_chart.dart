@@ -8,12 +8,16 @@ class ProtocolLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LineChart(LineChartData(lineBarsData: [
-      LineChartBarData(
-          barWidth: 2,
-          color: Colors.black,
-          spots: points.map((point) => FlSpot(point.x, point.y)).toList(),
-          dotData: const FlDotData(show: true)),
-    ]));
+    return LineChart(
+      LineChartData(
+        lineBarsData: [
+          LineChartBarData(
+              barWidth: 2,
+              color: Colors.black,
+              spots: points.map((point) => FlSpot(point.x, point.y)).toList(),
+              dotData: const FlDotData(show: true)),
+        ],
+      ),
+    );
   }
 }
