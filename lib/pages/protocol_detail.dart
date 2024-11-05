@@ -140,7 +140,8 @@ class ProtocolDetail extends ConsumerWidget {
                     return ListView.builder(
                       itemCount: applications.length,
                       itemBuilder: (context, index) {
-                        final application = applications[index];
+                        final application =
+                            applications.reversed.toList()[index];
                         return ListApplication(application: application);
                       },
                     );

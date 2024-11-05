@@ -20,7 +20,7 @@ Map<String, dynamic> createApplication(
   int success = 0;
   int failure = 0;
   double positivePercentage = 0.0;
-  bool aborted = false;
+  bool aborted = paramReasonAbortion == "" ? false : true;
   Application application;
 
   //Calcula Success e Failure

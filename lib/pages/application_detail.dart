@@ -222,7 +222,7 @@ class ApplicationDetail extends ConsumerWidget {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              '  ${attempt.help}',
+                                              '  ${attempt.help ?? ' '}',
                                               style:
                                                   const TextStyle(fontSize: 16),
                                             ),
@@ -242,7 +242,7 @@ class ApplicationDetail extends ConsumerWidget {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              '  ${attempt.comments}',
+                                              '  ${attempt.comments ?? ' '}',
                                               style:
                                                   const TextStyle(fontSize: 16),
                                             ),

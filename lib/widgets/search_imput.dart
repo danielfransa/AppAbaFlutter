@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SearchImput extends StatelessWidget {
-  SearchImput({super.key});
+  final TextEditingController _controller = TextEditingController();
+  final ValueChanged<String> onSearch;
 
-  final _controller = TextEditingController();
-
-  void _onSearch() {
-    final searchTerm = _controller.text;
-    // Realize a pesquisa com o termo digitado
-    print('Termo de pesquisa: $searchTerm');
-  }
+  SearchImput({super.key, required this.onSearch});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +17,10 @@ class SearchImput extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(8))),
           labelText: 'Pesquisar',
           suffixIcon: IconButton(
-            onPressed: _onSearch,
+            onPressed: () {
+              // Chama o callback apenas quando o ícone de pesquisa é pressionado
+              onSearch(_controller.text);
+            },
             icon: const Icon(Icons.search),
           ),
         ),

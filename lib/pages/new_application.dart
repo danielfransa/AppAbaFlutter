@@ -3,11 +3,9 @@ import 'package:aba_app/models/attempt.dart';
 import 'package:aba_app/models/protocol.dart';
 import 'package:aba_app/provider/add_application_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:validatorless/validatorless.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
-/// TODO:
-/// - Criar funcinalidade de Abortar
 
 class NewApplication extends StatefulWidget {
   const NewApplication({super.key, required this.protocol});
@@ -26,11 +24,37 @@ class _NewApplicationState extends State<NewApplication> {
 
   final _tipController = TextEditingController();
   final _observationController = TextEditingController();
+  final _reasonAbortion = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
+  bool abort = false;
   int tentativa = 1;
   List<Attempt> attempts = [];
 
   void _createAttempts(WidgetRef ref) async {
+    if (abort == true) {
+      Map<String, dynamic> applicationJson = createApplication(
+        paramProtocolId: widget.protocol.id,
+        paramReasonAbortion: _reasonAbortion.text,
+        paramAttempts: attempts,
+      );
+
+      await ref
+          .read(addApplicationProvider.notifier)
+          .addApplication(applicationJson, widget.protocol.id);
+
+      // voltar tentativas para primeira:
+      tentativa = 1;
+
+      // voltar aborto para false:
+      abort = false;
+
+      // lembre-se de limpar o attempts;
+      attempts = [];
+
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+    }
     if (tentativa == 10) {
       attempts.add(Attempt(
           attemptNumber: tentativa,
@@ -162,7 +186,63 @@ class _NewApplicationState extends State<NewApplication> {
                 ),
                 const SizedBox(height: 60),
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _reasonAbortion.text = '';
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Confirmar Aborto"),
+                          content: Form(
+                            key: formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text("Digite o motivo do aborto:"),
+                                const SizedBox(height: 20),
+                                TextFormField(
+                                  controller: _reasonAbortion,
+                                  validator: Validatorless.required(
+                                      'Motivo Obrigatório'),
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                    ),
+                                    labelText: 'Motivo do Aborto',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pop(); // Fecha o diálogo sem abortar
+                              },
+                              child: const Text("Cancelar"),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  Navigator.of(context)
+                                      .pop(); // Fecha o diálogo
+                                  abort = true;
+                                  setState(() {
+                                    _createAttempts(ref);
+                                  });
+                                } else {
+                                  print('Campo obrigatório não preenchido');
+                                }
+                              },
+                              child: const Text("Confirmar"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.red,
                     side: const BorderSide(color: Colors.red),
